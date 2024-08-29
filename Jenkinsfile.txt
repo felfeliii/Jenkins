@@ -19,7 +19,7 @@ pipeline {
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Test Stage Status: ${currentBuild.currentResult}",
                         body: "Test log attached.",
-                        attachmentsPattern: "Ran unit tests using Maven \nRan integration tests using Maven"
+                        attachLog: true
                     )
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Security Scan Status: ${currentBuild.currentResult}",
                         body: "Scan log attached.",
-                        attachmentsPattern: "Performed security scan on the code using OWASP"
+                        attachLog: true
                     )
                 }
             }
