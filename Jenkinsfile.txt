@@ -14,18 +14,12 @@ pipeline {
                 echo "Running integration tests using Maven"
             }
             post {  // Sends email notification after tests
-                always {
-                    script {
-                        writeFile file: 'TestLog.txt', text: "Running unit tests using Maven \nRunning integration tests using Maven"
-
-                        emailext(
-                            to: "felix.hendrawan.2005@gmail.com",
-                            subject: "Test Stage Status: ${currentBuild.currentResult}",
-                            body: "Test log attached.",
-                            attachmentsPattern: '**/TestLog.txt'
-                        )
-                    }
-                }
+                emailext(
+                    to: "felix.hendrawan.2005@gmail.com",
+                    subject: "Test Stage Status: ${currentBuild.currentResult}",
+                    body: "Test log attached.",
+                    attachLog: true
+                )
             }
         }
         
@@ -40,16 +34,12 @@ pipeline {
                 echo "Performing security scan on the code using OWASP"
             }
             post {  // Sends email notification after security scan
-                always {
-                    script {
-                        emailext(
-                            to: "felix.hendrawan.2005@gmail.com",
-                            subject: "Security Scan Status: ${currentBuild.currentResult}",
-                            body: "Scan log attached.",
-                            attachLog: true
-                        )
-                    }
-                }
+                emailext(
+                    to: "felix.hendrawan.2005@gmail.com",
+                    subject: "Security Scan Status: ${currentBuild.currentResult}",
+                    body: "Scan log attached.",
+                    attachLog: true
+                )
             }
         }
         
