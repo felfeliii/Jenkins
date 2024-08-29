@@ -17,7 +17,7 @@ pipeline {
                 always {
                     mail to: "felix.hendrawan.2005@gmail.com",
                          subject: "Test Stage Status: ${currentBuild.currentResult}",
-                         body: "Test log attached:\n\n${logContent}"
+                         body: "Test log attached:\n\n${WORKSPACE}/build.log"
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                 always {
                     mail to: "felix.hendrawan.2005@gmail.com",
                          subject: "Security Scan Status: ${currentBuild.currentResult}",
-                         body: "Scan log attached:\n\n${logContent}"
+                         body: "Scan log attached:\n\n${WORKSPACE}/build.log"
                 }
             }
         }
