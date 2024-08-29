@@ -12,9 +12,8 @@ pipeline {
             steps {
                 echo "Running unit tests using Maven"
                 echo "Running integration tests using Maven"
-                script {
-                    sh 'echo "Running unit tests using Maven \nRunning integration tests using Maven" > test.log'
-                }
+                bat 'echo Running unit tests using Maven > test.log'
+                bat 'echo Running integration tests using Maven >> test.log'
             }
             post {  // Sends email notification after tests
                 always {
@@ -37,9 +36,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "Performing security scan on the code using OWASP"
-                script {
-                    sh 'echo "Performing security scan on the code using OWASP" > security.log'
-                }
+                bat 'echo Performing security scan on the code using OWASP > security.log'
             }
             post {  // Sends email notification after security scan
                 always {
