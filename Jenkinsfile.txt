@@ -14,13 +14,25 @@ pipeline {
                 echo "Running integration tests using Maven"
             }
             post {  // Sends email notification after tests
-                always {
-                    emailext(
-                        to: "felix.hendrawan.2005@gmail.com",
-                        subject: "Test Stage Status: ${currentBuild.currentResult}",
-                        body: "Test log attached.",
-                        attachLog: true
-                    )
+                //always {
+                //    emailext(
+                //        to: "felix.hendrawan.2005@gmail.com",
+                //        subject: "Test Stage Status: ${currentBuild.currentResult}",
+                //        body: "Test log attached.",
+                //        attachLog: true
+                //    )
+                //}
+                failure {
+                    emailext subject: "Test Stage Failure",
+                             body: "Test log attached.",
+                             attachLog: true,
+                             to: "felix.hendrawan.2005@gmail.com"
+                }
+                success {
+                    emailext subject: "Test Stage Success",
+                             body: "Test log attached.",
+                             attachLog: true,
+                             to: "felix.hendrawan.2005@gmail.com"
                 }
             }
         }
@@ -35,16 +47,16 @@ pipeline {
             steps {
                 echo "Performing security scan on the code using OWASP"
             }
-            post {  // Sends email notification after security scan
-                always {
-                    emailext(
-                        to: "felix.hendrawan.2005@gmail.com",
-                        subject: "Security Scan Status: ${currentBuild.currentResult}",
-                        body: "Scan log attached.",
-                        attachLog: true
-                    )
-                }
-            }
+            //post {  // Sends email notification after security scan
+            //    always {
+            //        emailext(
+            //            to: "felix.hendrawan.2005@gmail.com",
+            //            subject: "Security Scan Status: ${currentBuild.currentResult}",
+            //            body: "Scan log attached.",
+            //            attachLog: true
+            //        )
+            //    }
+            //}
         }
         
         stage('Deploy to Staging') {
