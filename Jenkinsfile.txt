@@ -15,10 +15,10 @@ pipeline {
             }
             post {  // Sends email notification after tests
                 always {
-                    emailext to: "felix.hendrawan.2005@gmail.com",
-                             subject: "Test Stage Status: ${currentBuild.currentResult}",
-                             body: "Test log attached",
-                             attachLog: true
+                    mail to: "felix.hendrawan.2005@gmail.com",
+                         subject: "Test Stage Status: ${currentBuild.currentResult}",
+                         body: "Test log attached",
+                         attachmentsPattern: "${JENKINS_HOME}/workspace/build-${env.BUILD_NUMBER}.log"
                 }
             }
         }
@@ -35,10 +35,10 @@ pipeline {
             }
             post {  // Sends email notification after security scan
                 always {
-                    emailext to: "felix.hendrawan.2005@gmail.com",
-                             subject: "Security Scan Status: ${currentBuild.currentResult}",
-                             body: "Scan log attached",
-                             attachLog: true
+                    mail to: "felix.hendrawan.2005@gmail.com",
+                         subject: "Security Scan Status: ${currentBuild.currentResult}",
+                         body: "Scan log attached",
+                         attachmentsPattern: "${JENKINS_HOME}/workspace/build-${env.BUILD_NUMBER}.log"
                 }
             }
         }
