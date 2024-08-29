@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        LOG_FILE = "${WORKSPACE}/build.log"
+        LOG_FILE = "${WORKSPACE.replace('\\', '/')}/build.log"
     }
 
     stages {
