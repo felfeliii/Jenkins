@@ -17,7 +17,7 @@ pipeline {
                 always {
                     mail to: "felix.hendrawan.2005@gmail.com",
                     subject: "Test Stage Status: ${currentBuild.currentResult}",
-                    body: "Test log attached:\n\n${BUILD_LOG, maxLines=100, escapeHtml=false}"
+                    body: "Test log attached: \n\nRan unit tests using Maven \nRan integration tests using Maven"
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                 always {
                     mail to: "felix.hendrawan.2005@gmail.com",
                     subject: "Security Scan Status: ${currentBuild.currentResult}",
-                    body: "Scan log attached:\n\n${BUILD_LOG, maxLines=100, escapeHtml=false}"
+                    body: "Scan log attached: \n\nPerformed security scan on the code using OWASP"
                 }
             }
         }
