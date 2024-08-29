@@ -16,11 +16,14 @@ pipeline {
             post {  // Sends email notification after tests
                 always {
                     script {
+                        def log = "Running unit tests using Maven \nRunning integration tests using Maven"
+                        writeFile file: 'TestLog.txt', text: log
+
                         emailext(
                             to: "felix.hendrawan.2005@gmail.com",
                             subject: "Test Stage Status: ${currentBuild.currentResult}",
                             body: "Test log attached.",
-                            attachLog: true
+                            attachmentsPattern: 'TestLog.txt'
                         )
                     }
                 }
