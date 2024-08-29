@@ -15,9 +15,12 @@ pipeline {
             }
             post {  // Sends email notification after tests
                 always {
-                    mail to: "felix.hendrawan.2005@gmail.com",
-                    subject: "Test Stage Status: ${currentBuild.currentResult}",
-                    body: "Test log attached: \n\nRan unit tests using Maven \nRan integration tests using Maven"
+                    emailext(
+                        to: "felix.hendrawan.2005@gmail.com",
+                        subject: "Test Stage Status: ${currentBuild.currentResult}",
+                        body: "Test log attached.",
+                        attachmentsPattern: "Ran unit tests using Maven \nRan integration tests using Maven"
+                    )
                 }
             }
         }
@@ -34,9 +37,12 @@ pipeline {
             }
             post {  // Sends email notification after security scan
                 always {
-                    mail to: "felix.hendrawan.2005@gmail.com",
-                    subject: "Security Scan Status: ${currentBuild.currentResult}",
-                    body: "Scan log attached: \n\nPerformed security scan on the code using OWASP"
+                    emailext(
+                        to: "felix.hendrawan.2005@gmail.com",
+                        subject: "Security Scan Status: ${currentBuild.currentResult}",
+                        body: "Scan log attached.",
+                        attachmentsPattern: "Performed security scan on the code using OWASP"
+                    )
                 }
             }
         }
