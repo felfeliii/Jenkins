@@ -12,8 +12,6 @@ pipeline {
             steps {
                 echo "Running unit tests using Maven"
                 echo "Running integration tests using Maven"
-                //bat 'echo Running unit tests using Maven > test.log'
-                //bat 'echo Running integration tests using Maven >> test.log'
             }
             post {  // Sends email notification after tests
                 always {
@@ -21,7 +19,6 @@ pipeline {
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Test Stage Status: ${currentBuild.currentResult}",
                         body: "Test log attached"
-                        //attachmentsPattern: 'test.log'
                     )
                 }
             }
@@ -36,7 +33,6 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "Performing security scan on the code using OWASP"
-                //bat 'echo Performing security scan on the code using OWASP > security.log'
             }
             post {  // Sends email notification after security scan
                 always {
@@ -44,7 +40,6 @@ pipeline {
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Security Scan Status: ${currentBuild.currentResult}",
                         body: "Scan log attached"
-                        //attachmentsPattern: 'security.log'
                     )
                 }
             }
