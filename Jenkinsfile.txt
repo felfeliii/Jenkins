@@ -22,7 +22,7 @@ pipeline {
                             to: "felix.hendrawan.2005@gmail.com",
                             subject: "Test Stage Status: ${currentBuild.currentResult}",
                             body: "Test log attached.",
-                            attachmentsPattern: 'TestLog.txt'
+                            attachmentsPattern: '**/TestLog.txt'
                         )
                     }
                 }
