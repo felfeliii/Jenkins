@@ -15,10 +15,9 @@ pipeline {
             }
             post {  // Sends email notification after tests
                 success {
-                    mail(
+                    emailext(
                         subject: "Test Stage Status: ${currentBuild.currentResult}",
                         body: "Test log attached.",
-                        attachLog: true,
                         to: "felix.hendrawan.2005@gmail.com"
                     )
                 }
@@ -37,10 +36,9 @@ pipeline {
             }
             post {  // Sends email notification after security scan
                 success {
-                    mail(
+                    emailext(
                         subject: "Security Scan Status: ${currentBuild.currentResult}",
                         body: "Scan log attached.",
-                        attachLog: true,
                         to: "felix.hendrawan.2005@gmail.com"
                     )
                 }
