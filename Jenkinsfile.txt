@@ -16,8 +16,7 @@ pipeline {
             post {  // Sends email notification after tests
                 always {
                     script {
-                        def log = "Running unit tests using Maven \nRunning integration tests using Maven"
-                        writeFile file: 'TestLog.txt', text: log
+                        writeFile file: 'TestLog.txt', text: "Running unit tests using Maven \nRunning integration tests using Maven"
 
                         emailext(
                             to: "felix.hendrawan.2005@gmail.com",
