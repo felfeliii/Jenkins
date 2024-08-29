@@ -18,7 +18,8 @@ pipeline {
                     emailext(
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Test Stage Status: ${currentBuild.currentResult}",
-                        body: "Test log attached:\n\n${BUILD_LOG, maxLines, escapeHtml}"
+                        body: "Test log attached",
+                        attachLog: true
                     )
                 }
             }
@@ -39,7 +40,8 @@ pipeline {
                     emailext(
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Security Scan Status: ${currentBuild.currentResult}",
-                        body: "Scan log attached:\n\n${BUILD_LOG, maxLines, escapeHtml}"
+                        body: "Scan log attached",
+                        attachLog: true
                     )
                 }
             }
