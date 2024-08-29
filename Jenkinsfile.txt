@@ -14,7 +14,7 @@ pipeline {
                 echo "Running integration tests using Maven"
             }
             post {  // Sends email notification after tests
-                always {
+                success {
                     emailext(
                         subject: "Test Stage Status: ${currentBuild.currentResult}",
                         body: "Test log attached.",
@@ -36,7 +36,7 @@ pipeline {
                 echo "Performing security scan on the code using OWASP"
             }
             post {  // Sends email notification after security scan
-                always {
+                success {
                     emailext(
                         subject: "Security Scan Status: ${currentBuild.currentResult}",
                         body: "Scan log attached.",
