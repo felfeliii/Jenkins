@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        LOG_FILE = "${WORKSPACE}/build.log"
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -15,9 +19,12 @@ pipeline {
             }
             post {  // Sends email notification after tests
                 always {
-                    mail to: "felix.hendrawan.2005@gmail.com",
-                         subject: "Test Stage Status: ${currentBuild.currentResult}",
-                         body: "Test log attached:\n\n${WORKSPACE}/build.log"
+                    emailext(
+                        to: "felix.hendrawan.2005@gmail.com",
+                        subject: "Test Stage Status: ${currentBuild.currentResult}",
+                        body: "Test log attached:\n\n${WORKSPACE}/build.log",
+                        attachmentsPattern: "${LOG_FILE}"
+                    )
                 }
             }
         }
@@ -34,9 +41,12 @@ pipeline {
             }
             post {  // Sends email notification after security scan
                 always {
-                    mail to: "felix.hendrawan.2005@gmail.com",
-                         subject: "Security Scan Status: ${currentBuild.currentResult}",
-                         body: "Scan log attached:\n\n${WORKSPACE}/build.log"
+                    emailext(
+                        to: "felix.hendrawan.2005@gmail.com",
+                        subject: "Security Scan Status: ${currentBuild.currentResult}",
+                        body: "Scan log attached:\n\n${WORKSPACE}/build.log",
+                        attachmentsPattern: "${LOG_FILE}"
+                    )
                 }
             }
         }
