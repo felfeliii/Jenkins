@@ -15,9 +15,12 @@ pipeline {
             }
             post {  // Sends email notification after tests
                 always {
-                    mail to: "felix.hendrawan.2005@gmail.com",
-                    subject: "Test Stage Status: ${currentBuild.currentResult}",
-                    body: "Test"
+                    emailext(
+                        subject: "Test Stage Status: ${currentBuild.currentResult}",
+                        body: "Test log attached.",
+                        attachLog: true,
+                        to: "felix.hendrawan.2005@gmail.com"
+                    )
                 }
             }
         }
@@ -34,9 +37,12 @@ pipeline {
             }
             post {  // Sends email notification after security scan
                 always {
-                    mail to: "felix.hendrawan.2005@gmail.com",
-                    subject: "Security Scan Status: ${currentBuild.currentResult}",
-                    body: "Scan"
+                    emailext(
+                        subject: "Security Scan Status: ${currentBuild.currentResult}",
+                        body: "Scan log attached.",
+                        attachLog: true,
+                        to: "felix.hendrawan.2005@gmail.com"
+                    )
                 }
             }
         }
@@ -57,17 +63,6 @@ pipeline {
             steps {
                 echo "Deploying application to AWS EC2"
             }
-        }
-    }
-
-    post {  // Sends email notification after tests
-        always {
-            emailext(
-                subject: "Build Status: ${currentBuild.currentResult}",
-                body: "Build log attached.",
-                attachLog: true,
-                to: "felix.hendrawan.2005@gmail.com"
-            )
-        }
-    }
+        }
+    }
 }
