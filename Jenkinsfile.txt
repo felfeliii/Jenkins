@@ -18,8 +18,7 @@ pipeline {
                     emailext(
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Test Stage Status: ${currentBuild.currentResult}",
-                        body: "Test log attached.",
-                        attachLog: true
+                        body: "Test log attached: \n\nRunning unit tests using Maven \nRunning integration tests using Maven"
                     )
                 }
             }
@@ -40,8 +39,7 @@ pipeline {
                     emailext(
                         to: "felix.hendrawan.2005@gmail.com",
                         subject: "Security Scan Status: ${currentBuild.currentResult}",
-                        body: "Scan log attached.",
-                        attachLog: true
+                        body: "Scan log attached: \n\nPerforming security scan on the code using OWASP"
                     )
                 }
             }
